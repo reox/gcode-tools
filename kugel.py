@@ -12,7 +12,7 @@ from math import sqrt, pi, sin, cos, asin, acos
 # in mm
 r=200.0
 # how much slices should be generated
-steps = 50.0
+steps = 20.0
 # how much of the sphere should be done (from top down)
 segment_height=10.0
 # anlaufbogenradius
@@ -39,10 +39,12 @@ for alpha in numpy.linspace(fstart, fstop, steps):
 
     # position vor dem anlaufbogen anfahren
     print "G0 X%f Y%f Z%f" %(-p, -a, h+a)
-    # anlaufbogen, ccw in XZ Plane - parallel to Y Axis
+    # anlaufbogen, ccw in YZ Plane - parallel to X Axis
     print "G19 G3 Y0 Z%f J%f F100" %(h, a)
     # kreis fraesen
     print "G17 G2 X%f Y0 I%f F100" %(-p, p)
+    # anlaufbogen, ccw in YZ Plane - parallel to X Axis
+    print "G19 G3 Y%f Z%f K%f F100" %(a, h+a, a)
 
 print "G0 X0 Y0 Z%f; position ourself above the center of the sphere" %(40)
 print "M30"
